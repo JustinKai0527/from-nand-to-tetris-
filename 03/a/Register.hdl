@@ -1,0 +1,85 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/03/a/Register.hdl
+
+/**
+ * 16-bit register:
+ * If load[t] == 1 then out[t+1] = in[t]
+ * else out does not change
+ */
+
+CHIP Register {
+    IN in[16], load;
+    OUT out[16];
+
+    PARTS:
+    // Put your code here:
+    Bit(in=in[0], load=load, out=out[0]);
+    Bit(in=in[1], load=load, out=out[1]);
+    Bit(in=in[2], load=load, out=out[2]);
+    Bit(in=in[3], load=load, out=out[3]);
+    Bit(in=in[4], load=load, out=out[4]);
+    Bit(in=in[5], load=load, out=out[5]);
+    Bit(in=in[6], load=load, out=out[6]);
+    Bit(in=in[7], load=load, out=out[7]);
+    Bit(in=in[8], load=load, out=out[8]);
+    Bit(in=in[9], load=load, out=out[9]);
+    Bit(in=in[10], load=load, out=out[10]);
+    Bit(in=in[11], load=load, out=out[11]);
+    Bit(in=in[12], load=load, out=out[12]);
+    Bit(in=in[13], load=load, out=out[13]);
+    Bit(in=in[14], load=load, out=out[14]);
+    Bit(in=in[15], load=load, out=out[15]);
+    
+
+    // Mux(a=prev0, b=in[0], sel=load, out=ans0);
+    // Mux(a=prev1, b=in[1], sel=load, out=ans1);
+    // Mux(a=prev2, b=in[2], sel=load, out=ans2);
+    // Mux(a=prev3, b=in[3], sel=load, out=ans3);
+    // Mux(a=prev4, b=in[4], sel=load, out=ans4);
+    // Mux(a=prev5, b=in[5], sel=load, out=ans5);
+    // Mux(a=prev6, b=in[6], sel=load, out=ans6);
+    // Mux(a=prev7, b=in[7], sel=load, out=ans7);
+    // Mux(a=prev8, b=in[8], sel=load, out=ans8);
+    // Mux(a=prev9, b=in[9], sel=load, out=ans9);
+    // Mux(a=prev10, b=in[10], sel=load, out=ans10);
+    // Mux(a=prev11, b=in[11], sel=load, out=ans11);
+    // Mux(a=prev12, b=in[12], sel=load, out=ans12);
+    // Mux(a=prev13, b=in[13], sel=load, out=ans13);
+    // Mux(a=prev14, b=in[14], sel=load, out=ans14);
+    // Mux(a=prev15, b=in[15], sel=load, out=ans15);
+
+    // DFF(in=ans0, out=out[0]);                  //move to next state
+    // DFF(in=ans0, out=prev0);                 //return the ans to the input
+    // DFF(in=ans1, out=out[1]);                  
+    // DFF(in=ans1, out=prev1);
+    // DFF(in=ans2, out=out[2]);                  
+    // DFF(in=ans2, out=prev2);
+    // DFF(in=ans3, out=out[3]);                  
+    // DFF(in=ans3, out=prev3);  
+    // DFF(in=ans4, out=out[4]);                  
+    // DFF(in=ans4, out=prev4);
+    // DFF(in=ans5, out=out[5]);                  
+    // DFF(in=ans5, out=prev5);  
+    // DFF(in=ans6, out=out[6]);                  
+    // DFF(in=ans6, out=prev6);
+    // DFF(in=ans7, out=out[7]);                  
+    // DFF(in=ans7, out=prev7);
+    // DFF(in=ans8, out=out[8]);                  
+    // DFF(in=ans8, out=prev8);
+    // DFF(in=ans9, out=out[9]);                  
+    // DFF(in=ans9, out=prev9);
+    // DFF(in=ans10, out=out[10]);                  
+    // DFF(in=ans10, out=prev10);   
+    // DFF(in=ans11, out=out[11]);                  
+    // DFF(in=ans11, out=prev11);
+    // DFF(in=ans12, out=out[12]);                  
+    // DFF(in=ans12, out=prev12);
+    // DFF(in=ans13, out=out[13]);                  
+    // DFF(in=ans13, out=prev13);
+    // DFF(in=ans14, out=out[14]);                  
+    // DFF(in=ans14, out=prev14);
+    // DFF(in=ans15, out=out[15]);                  
+    // DFF(in=ans15, out=prev15);          
+}
