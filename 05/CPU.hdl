@@ -1,0 +1,51 @@
+CHIP CPU {
+
+    IN  inM[16],         // M value input  (M = contents of RAM[A])
+        instruction[16], // Instruction for execution
+        reset;           // Signals whether to re-start the current program
+                         // (reset == 1) or continue executing the current
+                         // program (reset == 0).
+
+    OUT outM[16],        // M value output
+        writeM,          // Write into M? 
+        addressM[15],    // RAM address (of M)
+        pc[15];          // ROM address (of next instruction)
+
+    PARTS:
+    
+    Not(in=instruction[15], out=Ainstruction);    
+    Mux16(a=instruction, b=ALUout, sel=instruction[15], out=toAreg);      
+    //sel = 0 set A register to instruction
+    
+    //addressM is 15 bit
+    And(a=instruction[15], b=instruction[5], out=temp);
+    Or(a=Ainstruction, b=temp, out=atest);
+    And(a=instruction[15], b=instruction[4], out=Dload);
+    And(a=instruction[15], b=instruction[3], out=writeM);
+
+    ARegister(in=toAreg, load=atest, out=Areg, out[0..14]=addressM);
+    DRegister(in=ALUout, load=Dload, out=Dreg);
+
+    Mux16(a=Areg, b=inM, sel=instruction[12], out=toALU);
+    
+    ALU(x=Dreg, y=toALU, zx=instruction[11], nx=instruction[10], zy=instruction[9], ny=instruction[8], f=instruction[7], no=instruction[6], out=ALUout, out=outM, zr=zr, ng=ng);
+
+    //K-map: AE + BD + CD'E'
+    Not(in=zr, out=notzr);
+    Not(in=ng, out=notng);
+    And(a=instruction[2], b=ng, out=AE);
+    And(a=instruction[1], b=zr, out=BD);
+    And(a=instruction[0], b=notzr, out=CnotD);
+    And(a=CnotD, b=notng, out=CnotDnotE);
+    Or(a=AE, b=BD, out=temp1);
+    Or(a=temp1, b=CnotDnotE, out=temp2);
+
+    And(a=instruction[15], b=temp2, out=ans);       //only Cinstruction have jump
+    Not(in=ans, out=inc);
+    
+    PC(in=Areg, load=ans, inc=inc, reset=reset, out[0..14]=pc);
+
+
+
+}
+
