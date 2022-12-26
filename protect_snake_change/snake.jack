@@ -1,0 +1,267 @@
+class snake {
+
+    field Array snake;
+    field int length;
+    field boolean color;
+    field boolean status;
+
+    constructor snake new() {
+
+        var int i;
+        var int x, y;
+        var Point p;
+        let status = false;
+        let color = true;
+        let snake = Array.new(10);
+        let length = 10;
+        let i = 0;
+        let x = 30;
+        let y = 20;
+        while(i < 10) {
+            let p = Point.new(x,y);
+            let x = x + 1;
+            let snake[i] = p;
+            let i = i + 1;
+        }
+        do print();
+        return this;
+    }
+
+    method void dispose() {
+
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    method void print() {
+
+		var int len;
+        var int count;
+        var Point test;
+        var int ansx, ansy;
+        let count = 0;
+        let len = length;
+		
+		while(len > 0) {
+			let len = len - 1;
+			let test = snake[count];
+			let ansx = test.get_x();
+            let ansy = test.get_y();
+            do Screen.setColor(color);
+            do Screen.drawRectangle(ansx - 1, ansy - 1, ansx + 1, ansy + 1);
+			let count = count + 1;
+		}
+		return;
+	}
+
+    method boolean get_status(){ return status;}
+    method int get_x() {
+        var Point tmp;
+        let tmp = snake[0];
+        return tmp.get_x();
+    }
+    method int get_y() {
+        var Point tmp;
+        let tmp = snake[0];
+        return tmp.get_y();
+    }
+
+    method void gameover() {
+        var int x, y, i, checkx, checky;
+        var Point p;
+        let p = snake[length - 1];
+        let x = p.get_x();
+        let y = p.get_y();
+        let i = 0;
+
+        while(i < (length - 1)){
+            let p = snake[i];
+            let checkx = p.get_x();
+            let checky = p.get_y();
+            if((checkx = x) & (checky = y)) { let status = true;}
+            let i = i + 1;
+        }
+        
+        return;
+    }
+
+    method void inc() {
+
+        var int i, x1, x2, y1, y2;
+        var Array tmp;
+        var Point p;
+        let i = 0;
+        let tmp = Array.new(length + 1);
+        let p = snake[i];
+        let x1 = p.get_x();
+        let y1 = p.get_y();
+        let p = snake[i + 1];
+        let x2 = p.get_x();
+        let y2 = p.get_y();
+        let x1 = 2*x1 - x2;
+        let y1 = 2*y1 - y2;
+        let p = Point.new(x1, y1);
+
+        let tmp[i] = p;
+        while(i < length){
+            let tmp[i + 1] = snake[i];
+            let i = i + 1;
+        }
+
+        let snake = tmp;
+        let length = length + 1;
+        return;
+    }
+
+    method void moveUp() {
+
+        var int x, y, prev_x, prev_y;
+        var int len;
+        var Point p;
+        let color = false;
+        do print();
+
+        let len = length;
+        let p = snake[len - 1];
+        let prev_x = p.get_x();
+        let prev_y = p.get_y();
+        let x = prev_x;
+        let y = prev_y - 3;
+        if(y > 3){
+            do p.change(x, y);
+            let snake[len - 1] = p;
+            let len = len - 1;
+
+            while(len > 0) {
+                let p = snake[len - 1];
+                let x = p.get_x();
+                let y = p.get_y();
+                do p.change(prev_x, prev_y);
+                let prev_x = x;
+                let prev_y = y;
+                let snake[len - 1] = p;
+                let len = len - 1;
+            }
+        } else {
+            let status = true;
+        }
+
+        let color = true;
+        do print();
+        return;
+    }
+
+    method void moveDown() {
+
+        var int x, y, prev_x, prev_y;
+        var int len;
+        var Point p;
+        let color = false;
+        do print();
+
+        let len = length;
+        let p = snake[len - 1];
+        let prev_x = p.get_x();
+        let prev_y = p.get_y();
+        let x = prev_x;
+        let y = prev_y + 3;
+        if((y + 3) < 255) {
+            do p.change(x, y);
+            let snake[len - 1] = p;
+            let len = len - 1;
+
+            while(len > 0) { //bc already finish the last one
+                let p = snake[len - 1];
+                let x = p.get_x();
+                let y = p.get_y();
+                do p.change(prev_x, prev_y);
+                let prev_x = x;
+                let prev_y = y;
+                let snake[len - 1] = p;
+                let len = len - 1;
+            }
+        } else {
+            let status = true;
+        }
+
+        let color = true;
+        do print();
+        return;
+    }
+
+    method void moveRight() {
+
+        var int x, y, prev_x, prev_y;
+        var int len;
+        var Point p;
+        let color = false;
+        do print();
+
+        let len = length;
+        let p = snake[len - 1];
+        let prev_x = p.get_x();
+        let prev_y = p.get_y();
+        let x = prev_x + 3;
+        let y = prev_y;
+        if((x + 3) < 511) {
+            do p.change(x, y);
+            let snake[len - 1] = p;
+            let len = len - 1;
+
+            while(len > 0) { //bc already finish the last one
+                let p = snake[len - 1];
+                let x = p.get_x();
+                let y = p.get_y();
+                do p.change(prev_x, prev_y);
+                let prev_x = x;
+                let prev_y = y;
+                let snake[len - 1] = p;
+                let len = len - 1;
+            }
+        } else {
+            let status = true;
+        }
+
+        let color = true;
+        do print();
+        return;
+    }
+
+    method void moveLeft() {
+
+        var int x, y, prev_x, prev_y;
+        var int len;
+        var Point p;
+        let color = false;
+        do print();
+
+        let len = length;
+        let p = snake[len - 1];
+        let prev_x = p.get_x();
+        let prev_y = p.get_y();
+        let x = prev_x - 3;
+        let y = prev_y;
+        if(x > 3) {
+            do p.change(x, y);
+            let snake[len - 1] = p;
+            let len = len - 1;
+
+            while(len > 0) { //bc already finish the last one
+                let p = snake[len - 1];
+                let x = p.get_x();
+                let y = p.get_y();
+                do p.change(prev_x, prev_y);
+                let prev_x = x;
+                let prev_y = y;
+                let snake[len - 1] = p;
+                let len = len - 1;
+            }
+        } else {
+            let status = true;
+        }
+
+        let color = true;
+        do print();
+        return;
+    }
+}

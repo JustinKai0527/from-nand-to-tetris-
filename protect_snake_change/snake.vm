@@ -1,0 +1,759 @@
+function snake.new 4
+push constant 4
+call Memory.alloc 1
+pop pointer 0
+push constant 0
+pop this 3
+push constant 0
+not
+pop this 2
+push constant 10
+call Array.new 1
+pop this 0
+push constant 10
+pop this 1
+push constant 0
+pop local 0
+push constant 30
+pop local 1
+push constant 20
+pop local 2
+label WHILE_EXP0
+push local 0
+push constant 10
+lt
+not
+if-goto WHILE_END0
+push local 1
+push local 2
+call Point.new 2
+pop local 3
+push local 1
+push constant 1
+add
+pop local 1
+push local 0
+push this 0
+add
+push local 3
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push pointer 0
+call snake.print 1
+pop temp 0
+push pointer 0
+return
+function snake.dispose 0
+push argument 0
+pop pointer 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return
+function snake.print 5
+push argument 0
+pop pointer 0
+push constant 0
+pop local 1
+push this 1
+pop local 0
+label WHILE_EXP0
+push local 0
+push constant 0
+gt
+not
+if-goto WHILE_END0
+push local 0
+push constant 1
+sub
+pop local 0
+push local 1
+push this 0
+add
+pop pointer 1
+push that 0
+pop local 2
+push local 2
+call Point.get_x 1
+pop local 3
+push local 2
+call Point.get_y 1
+pop local 4
+push this 2
+call Screen.setColor 1
+pop temp 0
+push local 3
+push constant 1
+sub
+push local 4
+push constant 1
+sub
+push local 3
+push constant 1
+add
+push local 4
+push constant 1
+add
+call Screen.drawRectangle 4
+pop temp 0
+push local 1
+push constant 1
+add
+pop local 1
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function snake.get_status 0
+push argument 0
+pop pointer 0
+push this 3
+return
+function snake.get_x 1
+push argument 0
+pop pointer 0
+push constant 0
+push this 0
+add
+pop pointer 1
+push that 0
+pop local 0
+push local 0
+call Point.get_x 1
+return
+function snake.get_y 1
+push argument 0
+pop pointer 0
+push constant 0
+push this 0
+add
+pop pointer 1
+push that 0
+pop local 0
+push local 0
+call Point.get_y 1
+return
+function snake.gameover 6
+push argument 0
+pop pointer 0
+push this 1
+push constant 1
+sub
+push this 0
+add
+pop pointer 1
+push that 0
+pop local 5
+push local 5
+call Point.get_x 1
+pop local 0
+push local 5
+call Point.get_y 1
+pop local 1
+push constant 0
+pop local 2
+label WHILE_EXP0
+push local 2
+push this 1
+push constant 1
+sub
+lt
+not
+if-goto WHILE_END0
+push local 2
+push this 0
+add
+pop pointer 1
+push that 0
+pop local 5
+push local 5
+call Point.get_x 1
+pop local 3
+push local 5
+call Point.get_y 1
+pop local 4
+push local 3
+push local 0
+eq
+push local 4
+push local 1
+eq
+and
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+not
+pop this 3
+label IF_FALSE0
+push local 2
+push constant 1
+add
+pop local 2
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function snake.inc 7
+push argument 0
+pop pointer 0
+push constant 0
+pop local 0
+push this 1
+push constant 1
+add
+call Array.new 1
+pop local 5
+push local 0
+push this 0
+add
+pop pointer 1
+push that 0
+pop local 6
+push local 6
+call Point.get_x 1
+pop local 1
+push local 6
+call Point.get_y 1
+pop local 3
+push local 0
+push constant 1
+add
+push this 0
+add
+pop pointer 1
+push that 0
+pop local 6
+push local 6
+call Point.get_x 1
+pop local 2
+push local 6
+call Point.get_y 1
+pop local 4
+push constant 2
+push local 1
+call Math.multiply 2
+push local 2
+sub
+pop local 1
+push constant 2
+push local 3
+call Math.multiply 2
+push local 4
+sub
+pop local 3
+push local 1
+push local 3
+call Point.new 2
+pop local 6
+push local 0
+push local 5
+add
+push local 6
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+label WHILE_EXP0
+push local 0
+push this 1
+lt
+not
+if-goto WHILE_END0
+push local 0
+push constant 1
+add
+push local 5
+add
+push local 0
+push this 0
+add
+pop pointer 1
+push that 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push local 5
+pop this 0
+push this 1
+push constant 1
+add
+pop this 1
+push constant 0
+return
+function snake.moveUp 6
+push argument 0
+pop pointer 0
+push constant 0
+pop this 2
+push pointer 0
+call snake.print 1
+pop temp 0
+push this 1
+pop local 4
+push local 4
+push constant 1
+sub
+push this 0
+add
+pop pointer 1
+push that 0
+pop local 5
+push local 5
+call Point.get_x 1
+pop local 2
+push local 5
+call Point.get_y 1
+pop local 3
+push local 2
+pop local 0
+push local 3
+push constant 3
+sub
+pop local 1
+push local 1
+push constant 3
+gt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 5
+push local 0
+push local 1
+call Point.change 3
+pop temp 0
+push local 4
+push constant 1
+sub
+push this 0
+add
+push local 5
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 4
+push constant 1
+sub
+pop local 4
+label WHILE_EXP0
+push local 4
+push constant 0
+gt
+not
+if-goto WHILE_END0
+push local 4
+push constant 1
+sub
+push this 0
+add
+pop pointer 1
+push that 0
+pop local 5
+push local 5
+call Point.get_x 1
+pop local 0
+push local 5
+call Point.get_y 1
+pop local 1
+push local 5
+push local 2
+push local 3
+call Point.change 3
+pop temp 0
+push local 0
+pop local 2
+push local 1
+pop local 3
+push local 4
+push constant 1
+sub
+push this 0
+add
+push local 5
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 4
+push constant 1
+sub
+pop local 4
+goto WHILE_EXP0
+label WHILE_END0
+goto IF_END0
+label IF_FALSE0
+push constant 0
+not
+pop this 3
+label IF_END0
+push constant 0
+not
+pop this 2
+push pointer 0
+call snake.print 1
+pop temp 0
+push constant 0
+return
+function snake.moveDown 6
+push argument 0
+pop pointer 0
+push constant 0
+pop this 2
+push pointer 0
+call snake.print 1
+pop temp 0
+push this 1
+pop local 4
+push local 4
+push constant 1
+sub
+push this 0
+add
+pop pointer 1
+push that 0
+pop local 5
+push local 5
+call Point.get_x 1
+pop local 2
+push local 5
+call Point.get_y 1
+pop local 3
+push local 2
+pop local 0
+push local 3
+push constant 3
+add
+pop local 1
+push local 1
+push constant 3
+add
+push constant 255
+lt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 5
+push local 0
+push local 1
+call Point.change 3
+pop temp 0
+push local 4
+push constant 1
+sub
+push this 0
+add
+push local 5
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 4
+push constant 1
+sub
+pop local 4
+label WHILE_EXP0
+push local 4
+push constant 0
+gt
+not
+if-goto WHILE_END0
+push local 4
+push constant 1
+sub
+push this 0
+add
+pop pointer 1
+push that 0
+pop local 5
+push local 5
+call Point.get_x 1
+pop local 0
+push local 5
+call Point.get_y 1
+pop local 1
+push local 5
+push local 2
+push local 3
+call Point.change 3
+pop temp 0
+push local 0
+pop local 2
+push local 1
+pop local 3
+push local 4
+push constant 1
+sub
+push this 0
+add
+push local 5
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 4
+push constant 1
+sub
+pop local 4
+goto WHILE_EXP0
+label WHILE_END0
+goto IF_END0
+label IF_FALSE0
+push constant 0
+not
+pop this 3
+label IF_END0
+push constant 0
+not
+pop this 2
+push pointer 0
+call snake.print 1
+pop temp 0
+push constant 0
+return
+function snake.moveRight 6
+push argument 0
+pop pointer 0
+push constant 0
+pop this 2
+push pointer 0
+call snake.print 1
+pop temp 0
+push this 1
+pop local 4
+push local 4
+push constant 1
+sub
+push this 0
+add
+pop pointer 1
+push that 0
+pop local 5
+push local 5
+call Point.get_x 1
+pop local 2
+push local 5
+call Point.get_y 1
+pop local 3
+push local 2
+push constant 3
+add
+pop local 0
+push local 3
+pop local 1
+push local 0
+push constant 3
+add
+push constant 511
+lt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 5
+push local 0
+push local 1
+call Point.change 3
+pop temp 0
+push local 4
+push constant 1
+sub
+push this 0
+add
+push local 5
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 4
+push constant 1
+sub
+pop local 4
+label WHILE_EXP0
+push local 4
+push constant 0
+gt
+not
+if-goto WHILE_END0
+push local 4
+push constant 1
+sub
+push this 0
+add
+pop pointer 1
+push that 0
+pop local 5
+push local 5
+call Point.get_x 1
+pop local 0
+push local 5
+call Point.get_y 1
+pop local 1
+push local 5
+push local 2
+push local 3
+call Point.change 3
+pop temp 0
+push local 0
+pop local 2
+push local 1
+pop local 3
+push local 4
+push constant 1
+sub
+push this 0
+add
+push local 5
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 4
+push constant 1
+sub
+pop local 4
+goto WHILE_EXP0
+label WHILE_END0
+goto IF_END0
+label IF_FALSE0
+push constant 0
+not
+pop this 3
+label IF_END0
+push constant 0
+not
+pop this 2
+push pointer 0
+call snake.print 1
+pop temp 0
+push constant 0
+return
+function snake.moveLeft 6
+push argument 0
+pop pointer 0
+push constant 0
+pop this 2
+push pointer 0
+call snake.print 1
+pop temp 0
+push this 1
+pop local 4
+push local 4
+push constant 1
+sub
+push this 0
+add
+pop pointer 1
+push that 0
+pop local 5
+push local 5
+call Point.get_x 1
+pop local 2
+push local 5
+call Point.get_y 1
+pop local 3
+push local 2
+push constant 3
+sub
+pop local 0
+push local 3
+pop local 1
+push local 0
+push constant 3
+gt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 5
+push local 0
+push local 1
+call Point.change 3
+pop temp 0
+push local 4
+push constant 1
+sub
+push this 0
+add
+push local 5
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 4
+push constant 1
+sub
+pop local 4
+label WHILE_EXP0
+push local 4
+push constant 0
+gt
+not
+if-goto WHILE_END0
+push local 4
+push constant 1
+sub
+push this 0
+add
+pop pointer 1
+push that 0
+pop local 5
+push local 5
+call Point.get_x 1
+pop local 0
+push local 5
+call Point.get_y 1
+pop local 1
+push local 5
+push local 2
+push local 3
+call Point.change 3
+pop temp 0
+push local 0
+pop local 2
+push local 1
+pop local 3
+push local 4
+push constant 1
+sub
+push this 0
+add
+push local 5
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 4
+push constant 1
+sub
+pop local 4
+goto WHILE_EXP0
+label WHILE_END0
+goto IF_END0
+label IF_FALSE0
+push constant 0
+not
+pop this 3
+label IF_END0
+push constant 0
+not
+pop this 2
+push pointer 0
+call snake.print 1
+pop temp 0
+push constant 0
+return
