@@ -74,6 +74,7 @@ class SnakeGame {
          do s.gameover();
          if (s.get_status())  { let exit = true; } 
          if (key = 81)  { let exit = true; }     // q key
+         if (key = 132) { do s.inc();}
          if (key = 131 & (direction > 2 | direction < 2)) { let direction = 1; }   // up arrow and avoid down
          if (key = 133 & (direction > 1 | direction < 1)) { let direction = 2; }   // down arrow and avoid up
          if (key = 130 & (direction > 4 | direction < 4)) { let direction = 3; }   // left arrow and avoid right

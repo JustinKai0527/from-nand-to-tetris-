@@ -23,7 +23,7 @@ class snake {
             let snake[i] = p;
             let i = i + 1;
         }
-        do print();
+        do start_print();
         return this;
     }
 
@@ -33,7 +33,7 @@ class snake {
         return;
     }
 
-    method void print() {
+    method void start_print() {
 
 		var int len;
         var int count;
@@ -48,9 +48,33 @@ class snake {
 			let ansx = test.get_x();
             let ansy = test.get_y();
             do Screen.setColor(color);
-            do Screen.drawPixel(ansx, ansy);
+            do Screen.drawRectangle(ansx - 1, ansy - 1, ansx + 1, ansy + 1);
 			let count = count + 1;
 		}
+		return;
+	}
+
+    method void print() {
+
+		var int len;
+        var int count;
+        var Point test;
+        var int ansx, ansy;
+        let count = 0;
+        let len = length;
+        let len = len - 1;
+		let test = snake[count];
+		let ansx = test.get_x();
+        let ansy = test.get_y();
+        do Screen.setColor(true);
+        do Screen.drawRectangle(ansx - 1, ansy - 1, ansx + 1, ansy + 1);
+
+        let test = snake[0];
+        do Screen.setColor(false);
+        let ansx = test.get_x();
+        let ansy = test.get_y();
+        do Screen.drawPixel(ansx, ansy);
+        do Screen.setColor(true);
 		return;
 	}
 
@@ -118,8 +142,6 @@ class snake {
         var int x, y, prev_x, prev_y;
         var int len;
         var Point p;
-        let color = false;
-        do print();
 
         let len = length;
         let p = snake[len - 1];
@@ -146,7 +168,6 @@ class snake {
             let status = true;
         }
 
-        let color = true;
         do print();
         return;
     }
@@ -156,8 +177,6 @@ class snake {
         var int x, y, prev_x, prev_y;
         var int len;
         var Point p;
-        let color = false;
-        do print();
 
         let len = length;
         let p = snake[len - 1];
@@ -184,7 +203,6 @@ class snake {
             let status = true;
         }
 
-        let color = true;
         do print();
         return;
     }
@@ -194,8 +212,6 @@ class snake {
         var int x, y, prev_x, prev_y;
         var int len;
         var Point p;
-        let color = false;
-        do print();
 
         let len = length;
         let p = snake[len - 1];
@@ -222,7 +238,6 @@ class snake {
             let status = true;
         }
 
-        let color = true;
         do print();
         return;
     }
@@ -232,8 +247,6 @@ class snake {
         var int x, y, prev_x, prev_y;
         var int len;
         var Point p;
-        let color = false;
-        do print();
 
         let len = length;
         let p = snake[len - 1];
@@ -259,8 +272,6 @@ class snake {
         } else {
             let status = true;
         }
-
-        let color = true;
         do print();
         return;
     }
